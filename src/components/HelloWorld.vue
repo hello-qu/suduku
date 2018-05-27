@@ -1,113 +1,71 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
-  </div>
+	<div class="cntainer">
+		<h3>欢迎来玩数独游戏</h3>
+		<div class="sudoku_wrapper">
+				<div class="row" v-for="row in martix">
+					<span class="column cell" v-for="cell in row">{{cell}}</span>
+				</div>
+		</div>	
+	</div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
+	name: 'sudoku',
+	data () {
+		return {
+			msg: '欢迎来玩数独游戏',
+			martix : []
+		}
+	},
+
+	created(){
+		this.martix = Array.apply(null,{length:9})
+			.map((v,i)=>Array.apply(null,{length:9})
+			.map((v,i)=>i+1));
+		
+	}
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
+.sudoku_wrapper{
+	display: inline-flex;
+	flex-direction: column;
+	border-left: 1px solid rgb(158, 158, 158);
+	border-top: 1px solid rgb(158, 158, 158);
+	/*border-top:0;*/
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+.row {
+    display: flex;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+
+
+.row:nth-child(3) span.column.cell  {
+    border-bottom:2px solid rgb(158, 158, 158);
 }
-a {
-  color: #42b983;
+.row:nth-child(6) span.column.cell  {
+    border-bottom:2px solid rgb(158, 158, 158);
 }
+span.column.cell {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    justify-content: center;
+    align-items: center;
+    border-right:1px solid rgb(158, 158, 158);
+    border-bottom: 1px solid rgb(158, 158, 158);
+}
+
+span.column.cell:nth-child(3) {
+    border-right:2px solid rgb(158, 158, 158);
+}
+
+span.column.cell:nth-child(6) {
+    border-right:2px solid rgb(158, 158, 158);
+}
+
+
 </style>
